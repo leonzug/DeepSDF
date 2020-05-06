@@ -2,7 +2,7 @@ import numpy as np
 import torch
 import random
 
-airplane_sdf=np.load('10ba42fc70f16d7f41d86c17c15247b0.npz')
+airplane_sdf=np.load('small_experiment_data/10ba42fc70f16d7f41d86c17c15247b0.npz')
 positive= airplane_sdf['pos']
 negative= airplane_sdf['neg']
 

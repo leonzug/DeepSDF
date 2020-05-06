@@ -13,6 +13,11 @@ import torch
 from random import sample
 from visualize import plot_pointcloud
 
+'''
+written by Leon Zueger, ETHZ
+04.05.2020
+'''
+
 def get_statistics (pointcloud):
     '''
     inputs: 
@@ -69,12 +74,15 @@ def normalize_pc(pointcloud,a,b):
         
 if __name__ == "__main__":
     device = torch.device("cpu")
+
     #import point cloud directly from .obj file
-    ind, faces,  aux = load_obj("unknown.obj", False)
+    ind, faces,  aux = load_obj("small_experiment_data/unknown.obj", False)
     faces= faces.verts_idx.to(device)
     mesh=Meshes(verts=[ind],faces=[faces])
     pointcloud=sample_points_from_meshes(mesh,10000)
     pointcloud=pointcloud[0,:,:]
+    plot_pointcloud(pointcloud)
+    pointcloud=pointcloud.numpy()
 
     #plot_pointcloud(pointcloud,"A beautiful unknown pointcloud")
     
@@ -86,9 +94,9 @@ if __name__ == "__main__":
     cells=np.array([2,2,200])
     index=np.array([0,1,1])
 
-    pointcloud=pointcloud.numpy()
     
-    pointcloud=np.loadtxt("pointcloud_test.txt") #loas previously saved pc so that we don't resample every time
+    
+    pointcloud=np.loadtxt("small_experiment_data/pointcloud_test.txt") #loas previously saved pc so that we don't resample every time
     plot_pointcloud(pointcloud,"A beautiful unknown pointcloud")
 
     division=divide_and_conquer(pointcloud,cells,index)
